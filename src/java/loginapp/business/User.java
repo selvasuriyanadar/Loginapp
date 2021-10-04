@@ -29,7 +29,7 @@ public class User implements Serializable {
 
   public Map<String, String> validateUserName() {
 
-    Map<String, String> errors = new HashMap<String, String>();
+    Map<String, String> errors = new HashMap<>();
 
     if (userName == null || userName.equals("")) {
       errors.put("UserName", "User Name cannot be empty.");
@@ -51,7 +51,7 @@ public class User implements Serializable {
 
   public Map<String, String> validatePassword() {
 
-    Map<String, String> errors = new HashMap<String, String>();
+    Map<String, String> errors = new HashMap<>();
 
     if (password == null || password.equals("")) {
       errors.put("Password", "Password cannot be empty.");
@@ -68,11 +68,15 @@ public class User implements Serializable {
 
   public Map<String, String> validate() {
 
-    Map<String, String> errors = new HashMap<String, String>();
+    Map<String, String> errors = new HashMap<>();
 
     errors.putAll(validateUserName());
     errors.putAll(validatePassword());
 
     return errors;
+  }
+
+  public boolean matches(User user) {
+    return user.getUserName().equals(userName) && user.getPassword().equals(password);
   }
 }
