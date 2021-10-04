@@ -12,6 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.inject.Inject;
+
+import loginapp.controller.UserLoginController;
+import loginapp.business.UserLoginSession;
 
 /**
  *
@@ -19,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {""})
 public class LoginServlet extends HttpServlet {
+
+  @Inject UserLoginSession userLoginSession;
 
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -77,10 +83,25 @@ public class LoginServlet extends HttpServlet {
     String action = request.getParameter("action");
 
     if (action.equals("login")) {
-      response.sendRedirect("home");
+      if (UserLoginController.login(
+            userLoginSession,
+            request.getParameter("userName"),
+            request.getParameter("password"))) {
+        response.sendRedirect("home");
+      }
+      else {
+        getServletContext()
+          .getRequestDispatcher("/WEB-INF/login.jsp")
+          .forward(request, response);
+      }
     }
     else if (action.equals("register")) {
       response.sendRedirect("register");
+    }
+    else {
+      getServletContext()
+        .getRequestDispatcher("/WEB-INF/login.jsp")
+        .forward(request, response);
     }
   }
 

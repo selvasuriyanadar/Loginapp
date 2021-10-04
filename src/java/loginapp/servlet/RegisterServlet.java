@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import loginapp.controller.UserLoginController;
+
 /**
  *
  * @author selva
@@ -74,7 +76,17 @@ public class RegisterServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    response.sendRedirect("");
+    if (UserLoginController.register(
+          request.getParameter("userName"),
+          request.getParameter("password"),
+          request.getParameter("confirmPassword"))) {
+      response.sendRedirect("");
+    }
+    else {
+      getServletContext()
+        .getRequestDispatcher("/WEB-INF/register.jsp")
+        .forward(request, response);
+    }
   }
 
   /**

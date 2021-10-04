@@ -19,11 +19,11 @@
 <form action="" method="post">
   <input type="hidden" name="action" value="login" />
   <label class="pad_top">User Name:</label>
-  <input type="text" name="userName" /><br />
+  <input type="text" name="userName"
+    value='<%=(request.getParameter("userName") == null)? "": request.getParameter("userName")%>' /><br />
   <label class="pad_top">Password:</label>
-  <input type="password" name="password" /><br />
-  <label class="pad_top">Confirm Password:</label>
-  <input type="password" name="confirmPassword" /><br />
+  <input type="password" name="password"
+    value='<%=(request.getParameter("password") == null)? "": request.getParameter("password")%>' /><br />
   <label>&nbsp;</label>
   <input type="submit" value="Login" class="margin_left" />
 </form>

@@ -12,6 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.inject.Inject;
+
+import loginapp.controller.UserLoginController;
+import loginapp.business.UserLoginSession;
 
 /**
  *
@@ -19,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ProfileServlet", urlPatterns = {"/profile"})
 public class ProfileServlet extends HttpServlet {
+
+  @Inject UserLoginSession userLoginSession;
 
   /**
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -77,15 +83,33 @@ public class ProfileServlet extends HttpServlet {
     String action = request.getParameter("action");
 
     if (action.equals("update_password")) {
+      UserLoginController.updatePassword(
+            userLoginSession,
+            request.getParameter("oldPassword"),
+            request.getParameter("newPassword"),
+            request.getParameter("confirmPassword"));
       getServletContext()
         .getRequestDispatcher("/WEB-INF/profile.jsp")
         .forward(request, response);
     }
     else if (action.equals("logout")) {
+      UserLoginController.logout(userLoginSession);
       response.sendRedirect("");
     }
     else if (action.equals("delete_account")) {
-      response.sendRedirect("");
+      if (UserLoginController.deleteUser(userLoginSession)) {
+        response.sendRedirect("");
+      }
+      else {
+        getServletContext()
+          .getRequestDispatcher("/WEB-INF/profile.jsp")
+          .forward(request, response);
+      }
+    }
+    else {
+      getServletContext()
+        .getRequestDispatcher("/WEB-INF/profile.jsp")
+        .forward(request, response);
     }
   }
 

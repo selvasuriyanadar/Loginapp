@@ -13,6 +13,12 @@ public class ConnectionPool {
   private static ConnectionPool pool = null;
 
   private ConnectionPool() {
+    try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+    }
+    catch (ClassNotFoundException e) {
+      System.out.println(e);
+    }
   }
 
   public static ConnectionPool getInstance() {

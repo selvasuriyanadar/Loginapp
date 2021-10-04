@@ -1,7 +1,9 @@
 package loginapp.business;
 
 import java.io.Serializable;
+import javax.enterprise.context.SessionScoped;
 
+@SessionScoped
 public class UserLoginSession implements Serializable {
 
   private String userName;

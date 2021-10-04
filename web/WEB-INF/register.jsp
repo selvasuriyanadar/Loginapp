@@ -20,7 +20,9 @@
   <label class="pad_top">User Name:</label>
   <input type="text" name="userName" /><br />
   <label class="pad_top">Password:</label>
-  <input type="text" name="password" /><br />
+  <input type="password" name="password" /><br />
+  <label class="pad_top">Confirm Password:</label>
+  <input type="password" name="confirmPassword" /><br />
   <label>&nbsp;</label>
   <input type="submit" value="Register" class="margin_left" />
 </form>
