@@ -5,13 +5,35 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:import url="/includes/header.html" />
+
+<h1>Login</h1>
+
+<p>Please log into your account.</p>
+
+<c:if test="${message != null}">
+  <p><i>${message}</i></p>
+</c:if>
+
+<form action="" method="post">
+  <input type="hidden" name="action" value="login" />
+  <label class="pad_top">User Name:</label>
+  <input type="text" name="userName" /><br />
+  <label class="pad_top">Password:</label>
+  <input type="password" name="password" /><br />
+  <label class="pad_top">Confirm Password:</label>
+  <input type="password" name="confirmPassword" /><br />
+  <label>&nbsp;</label>
+  <input type="submit" value="Login" class="margin_left" />
+</form>
+
+<p>Don't have an account!<br />
+  You can quikly register a new account.</p>
+
+<form action="" method="post">
+  <input type="hidden" name="action" value="register" />
+  <input type="submit" value="Register New" class="margin_left" />
+</form>
+
+<c:import url="/includes/footer.jsp" />

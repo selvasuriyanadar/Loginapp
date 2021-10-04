@@ -5,13 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:import url="/includes/header.html" />
+
+<h1>Home</h1>
+
+<p>Welcome!<br />
+  You can manage your account from your profile.</p>
+
+<form action="home" method="post">
+  <input type="submit" value="Profile" class="margin_left" />
+</form>
+
+<c:import url="/includes/footer.jsp" />
