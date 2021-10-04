@@ -28,7 +28,7 @@ public class UserDB {
         }
     }
 
-    public static int UpdatePassword(User user) {
+    public static int updatePassword(User user) {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
